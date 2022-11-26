@@ -1,0 +1,8 @@
+CREATE PROCEDURE getProducts
+AS
+BEGIN
+SELECT * FROM products
+WHERE isDelete=0
+
+
+END
