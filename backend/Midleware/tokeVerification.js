@@ -2,7 +2,7 @@ const jwt = require("jsonwebtoken");
 require("dotenv").config();
 
 const userVerification = async (req, res, next) => {
-  const token = req.get("Authorization")
+  const token = req.headers["x-access-token"]
 
   if (!token) {
     return res.status(403).send("A token is required for authentication");
@@ -13,7 +13,7 @@ const userVerification = async (req, res, next) => {
   } catch (err) {
     return res.status(401).send("Invalid Token");
   }
-  next();
+  return next();
 };
 
 module.exports = {

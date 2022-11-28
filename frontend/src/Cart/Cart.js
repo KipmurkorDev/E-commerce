@@ -10,12 +10,13 @@ import {
 } from "../Redux/Reducers/CartSlice";
 
 export const CartProduct = () => {
+
   let { cartItem, TotalAmount } = useSelector((state) => state.carts);
   const dispatch = useDispatch();
   console.log(cartItem);
   useEffect(() => {
     dispatch(getCart());
-  }, [dispatch, cartItem]);
+  }, [dispatch]);
 
   TotalAmount = cartItem.reduce((sum, item) => sum + item.amount, 0);
 

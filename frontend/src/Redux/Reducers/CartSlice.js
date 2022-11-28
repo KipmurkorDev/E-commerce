@@ -1,5 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
+import authHeader from './authorHeaders'
+
 
 const url = "http://localhost:5000/cart";
 
@@ -10,7 +12,7 @@ const initialState = {
 };
 export const getCart = createAsyncThunk("carts", async () => {
   let cartItem = [];
-  await axios.get(url).then((data) => {
+  await axios.get(url, {headers:authHeader()}).then((data) => {
     cartItem = [...data.data];
   });
   return cartItem;
@@ -37,21 +39,19 @@ export const updatCart = createAsyncThunk(
   getCart()
 );
 export const deletCart = createAsyncThunk(
-    "deletecart",
-    async (id_product) => {
-      const response = await axios
-        .delete(`${url}/${id_product}`)
-        .then((data) => data.json());
-      return response;
-    },
-    getCart()
-  );
+  "deletecart",
+  async (id_product) => {
+    const response = await axios
+      .delete(`${url}/${id_product}`)
+      .then((data) => data.json());
+    return response;
+  },
+  getCart()
+);
 export const clear = createAsyncThunk(
   "deletCart",
   async () => {
-    const response = await axios
-      .delete(url)
-      .then((data) => data.json());
+    const response = await axios.delete(url).then((data) => data.json());
     return response;
   },
   getCart()

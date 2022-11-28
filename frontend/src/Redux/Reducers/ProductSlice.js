@@ -1,17 +1,19 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
-
+import authHeader from './authorHeaders'
 const url = "http://localhost:5000/Products";
+
+
+
+
+
 const initialState = {
   products: [],
 };
-
 export const getproducts = createAsyncThunk("Products", async () => {
   let products = [];
-  await axios.get(url).then((data) => {
-    products = [...data.data];
-  });
-  console.log(products);
+  const response= await axios.get(url, {headers:authHeader()}).then((data) =>data.data);
+   products = [...response];
   return products;
 });
 export const addproducts = createAsyncThunk(

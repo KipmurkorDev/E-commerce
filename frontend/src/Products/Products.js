@@ -10,7 +10,7 @@ export default function Products() {
   const dispatch = useDispatch();
   const cartItem = useSelector((state) => state.carts.cartItem);
   console.log(cartItem);
-  const { products } = useSelector((state) => state.products);
+  const products  = useSelector((state) => state.products.products);
   console.log(products);
   useEffect(() => {
     dispatch(getproducts());
