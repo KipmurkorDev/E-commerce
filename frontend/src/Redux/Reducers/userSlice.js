@@ -27,17 +27,17 @@ const userSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: {
-    [getUser.pending]: (state) => {
-      state.loading = true;
-    },
-    [getUser.fulfilled]: (state, { payload }) => {
-      console.log(payload);
-      state.loading = false;
-      state.token = payload;
-    },
-    [getUser.rejected]: (state) => {
-      state.loading = false;
-    },
+    // [getUser.pending]: (state) => {
+    //   state.loading = true;
+    // },
+    // [getUser.fulfilled]: (state, { payload }) => {
+    //   console.log(payload);
+    //   state.loading = false;
+    //   state.token = payload;
+    // },
+    // [getUser.rejected]: (state) => {
+    //   state.loading = false;
+    // },
   },
 });
 

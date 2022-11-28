@@ -18,7 +18,7 @@ const signin = async (req, res) => {
       );
       if (confirmpassword) {
         const token = jwt.sign({email:user.email, user_password:user.user_password},process.env.SECRET, {expiresIn:'2h'})
-        res.header("auth-token", token);
+        res.header("auth-token", token).status(200).send({token});
       } 
       else {
         return res.status(400).json({ message: "wrong  password" });
