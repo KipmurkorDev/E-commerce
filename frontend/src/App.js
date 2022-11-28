@@ -7,16 +7,17 @@ import Contact from "./Navbar/Contact";
 import { CartProduct } from "./Cart/Cart";
 import Navbar from "./Navbar/Navbar";
 import About from "./Navbar/About";
+import Signup from "./Signup/signup";
 function App() {
   const location=useLocation()
 
   return (
     <div className="App">
        
-       {location.pathname !== '/' ? <Navbar /> : null}
-       
+       {location.pathname !== '/' && location.pathname !== '/signup'? <Navbar /> : null}
         <Routes>
           <Route index element={<Login />} />
+          <Route exact path="/signup" element={<Signup />} />
 
           <Route exact path="/Products" element={<Products />} />
           <Route exact path="/cart" element={<CartProduct />} />

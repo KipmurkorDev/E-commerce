@@ -1,36 +1,36 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { getUser } from "../Redux/Reducers/userSlice";
-import { Link } from "react-router-dom";
-import "./Login.css";
+import { addusers } from "../Redux/Reducers/userSlice";
+import "./signup.css";
 
-export default function Login() {
+export default function Signup() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const [logInput, setLogInput] = useState({
+  const [signUpInput, setSignup] = useState({
     email: "",
     user_password: "",
   });
   const handleInputChange = (e) => {
-    setLogInput((prev) => ({
+    setSignup((prev) => ({
       ...prev,
       [e.target.name]: e.target.value,
     }));
   };
   const validate = (e) => {
-    if (logInput.email === "" || logInput.user_password === "") {
+    if (signUpInput.user_name=== ""||signUpInput.email === "" || signUpInput.user_password === "") {
       clearForm();
       alert(" You did not complete  the form, kindly do so.");
     } else {
-      dispatch(getUser(logInput));
+      dispatch(addusers(signUpInput));
       clearForm();
-      navigate("/Products");
+      navigate("/");
     }
   };
   const clearForm = () => {
-    setLogInput({
+    setSignup({
+      user_name: "",
       email: "",
       user_password: "",
     });
@@ -39,14 +39,28 @@ export default function Login() {
   return (
     <div className="form">
       <div className="title">Welcome</div>
-      <div className="subtitle">Please Login</div>
+      <div className="subtitle">Please Signup</div>
+      <div className="input-container ic1">
+        <input
+          id="user"
+          className="input"
+          type="text"
+          name="user_name"
+          value={signUpInput.user_name}
+          onChange={handleInputChange}
+        />
+        <div className="cut"></div>
+        <label htmlFor="user" className="placeholder">
+          Name
+        </label>
+      </div>
       <div className="input-container ic1">
         <input
           id="email"
           className="input"
           type="email"
           name="email"
-          value={logInput.email}
+          value={signUpInput.email}
           onChange={handleInputChange}
         />
         <div className="cut"></div>
@@ -60,7 +74,7 @@ export default function Login() {
           className="input"
           type="password"
           name="user_password"
-          value={logInput.user_password}
+          value={signUpInput.user_password}
           onChange={handleInputChange}
         />
         <div className="cut"></div>
@@ -75,11 +89,9 @@ export default function Login() {
           validate();
         }}
       >
-        Login
+        Signup
       </button>
-      <p> <Link to="/signup">
-        Register
-      </Link></p>
+     
     </div>
   );
 }

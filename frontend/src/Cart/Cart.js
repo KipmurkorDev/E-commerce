@@ -6,7 +6,7 @@ import {
   updatCart,
   deletCart,
   getCart,
-  clear
+  clear,
 } from "../Redux/Reducers/CartSlice";
 
 export const CartProduct = () => {
@@ -17,7 +17,7 @@ export const CartProduct = () => {
     dispatch(getCart());
   }, [dispatch, cartItem]);
 
-  TotalAmount = cartItem.reduce((sum, item)=>sum + item.amount, 0)
+  TotalAmount = cartItem.reduce((sum, item) => sum + item.amount, 0);
 
   return (
     <div className="grid-3">
@@ -28,8 +28,8 @@ export const CartProduct = () => {
           cartItem.map((item) => (
             <div className="flex-container">
               <div className="img-cart">
-                <img src={item.image} alt={item.name} />
-                <h4> Product:{item.name}</h4>
+                <img src={item.image_url} alt={item.name_product} />
+                <h4> Product:{item.name_product}</h4>
                 <h4>Price:${item.price}</h4>
                 <p>Discount: {item.discount_rate}%</p>
                 <p>Description: {item.description}</p>
@@ -60,7 +60,7 @@ export const CartProduct = () => {
                   onClick={() => {
                     let newcart = {
                       ...item,
-                      quantity: item.quantity -1,
+                      quantity: item.quantity - 1,
                       amount: item.quantity * item.price,
                     };
                     if (item.quantity === 1) {
@@ -77,7 +77,6 @@ export const CartProduct = () => {
           ))
         )}
         <button onClick={() => dispatch(clear())} style={{ color: "red" }}>
-          {" "}
           clear
         </button>
       </div>

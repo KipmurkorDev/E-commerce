@@ -11,10 +11,12 @@ export default function Products() {
   const cartItem = useSelector((state) => state.carts.cartItem);
   console.log(cartItem);
   const { products } = useSelector((state) => state.products);
+  console.log(products);
   useEffect(() => {
     dispatch(getproducts());
     dispatch(getCart());
-  }, [dispatch, products, cartItem]);
+  }, [dispatch]);
+  
   const handlecartitem = (data) => {
     const itemInCart = cartItem.findIndex(
       (item) => item.id_product === data.id_product
@@ -26,10 +28,8 @@ export default function Products() {
       let newcart = {
         ...cartItem[itemInCart],
         quantity: cartItem[itemInCart].quantity + 1,
-        amount: cartItem[itemInCart].quantity * cartItem[itemInCart].price,
+        amount: cartItem[itemInCart].quantity * cartItem[itemInCart].price+cartItem[itemInCart].price
       };
-      console.log(cartItem[itemInCart]);
-      console.log(newcart);
       dispatch(updatCart(newcart));
     }
   };
@@ -41,8 +41,8 @@ export default function Products() {
         {products.map((item) => (
           <div className="product-2">
             <div>
-              <img className="img-1" src={item.image} alt={item.name} />
-              <h4> Product:{item.name}</h4>
+              <img className="img-1" src={item.image_url} alt={item.name_product} />
+              <h4> Product:{item.name_product}</h4>
             </div>
             <div>
               <h4>Price:${item.price}</h4>
@@ -52,14 +52,7 @@ export default function Products() {
             <div>
               <button
                 onClick={() => {
-                  handlecartitem({
-                    id_product: item.id,
-                    name: item.name,
-                    image: item.image,
-                    price: item.price,
-                    discount_rate: item.discount_rate,
-                    description: item.description,
-                  });
+                  handlecartitem(item);
                 }}
                 className="add-cart"
               >
@@ -67,7 +60,7 @@ export default function Products() {
               </button>
               <button
                 onClick={() => {
-                  dispatch(deleProduct(item.id));
+                  dispatch(deleProduct(item.id_product));
                 }}
                 style={{ background: "red" }}
               >

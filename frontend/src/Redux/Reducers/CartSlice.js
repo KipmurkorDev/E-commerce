@@ -1,6 +1,8 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
+const url = "http://localhost:5000/cart";
+
 const initialState = {
   cartItem: [],
   Totalquantity: 0,
@@ -8,25 +10,9 @@ const initialState = {
 };
 export const getCart = createAsyncThunk("carts", async () => {
   let cartItem = [];
-  await axios
-    .get("https://e-commerce-b5db9-default-rtdb.firebaseio.com/carts.json")
-    .then((data) => {
-      console.log(data);
-      for (let key in data.data) {
-        cartItem.push({
-          id: key,
-          name: data.data[key].name,
-          price: data.data[key].price,
-          id_product: data.data[key].id_product,
-          quantity: data.data[key].quantity,
-          amount: data.data[key].amount,
-          image: data.data[key].image,
-
-          discount_rate: data.data[key].discount_rate,
-          description: data.data[key].description,
-        });
-      }
-    });
+  await axios.get(url).then((data) => {
+    cartItem = [...data.data];
+  });
   return cartItem;
 });
 
@@ -34,12 +20,8 @@ export const addCart = createAsyncThunk(
   "postCart",
   async (data) => {
     let newData = { ...data, quantity: 1, amount: data.price };
-    const response = await axios
-      .post(
-        "https://e-commerce-b5db9-default-rtdb.firebaseio.com/carts.json",
-        newData
-      )
-      .then((data) => data.json());
+    console.log(newData);
+    const response = await axios.post(url, newData).then((data) => data.json());
     return response;
   },
   getCart()
@@ -47,39 +29,28 @@ export const addCart = createAsyncThunk(
 export const updatCart = createAsyncThunk(
   "updatecart",
   async (data) => {
-    console.log(data.id);
     const response = await axios
-      .put(
-        `https://e-commerce-b5db9-default-rtdb.firebaseio.com/carts/${data.id}.json`,
-        data
-      )
+      .put(`${url}/${data.id_product}`, data)
       .then((data) => data.json());
     return response;
   },
   getCart()
 );
 export const deletCart = createAsyncThunk(
-  "deletCart",
-  async (data) => {
-    console.log(data.id);
-    const response = await axios
-      .delete(
-        `https://e-commerce-b5db9-default-rtdb.firebaseio.com/carts/${data.id}.json`,
-        data
-      )
-      .then((data) => data.json());
-    return response;
-  },
-  getCart()
-);
+    "deletecart",
+    async (id_product) => {
+      const response = await axios
+        .delete(`${url}/${id_product}`)
+        .then((data) => data.json());
+      return response;
+    },
+    getCart()
+  );
 export const clear = createAsyncThunk(
   "deletCart",
-  async (data) => {
+  async () => {
     const response = await axios
-      .delete(
-        `https://e-commerce-b5db9-default-rtdb.firebaseio.com/carts.json`,
-        data
-      )
+      .delete(url)
       .then((data) => data.json());
     return response;
   },

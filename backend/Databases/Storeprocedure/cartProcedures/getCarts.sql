@@ -1,0 +1,8 @@
+CREATE PROCEDURE getCarts
+AS
+BEGIN
+SELECT * FROM cart
+WHERE isDelete=0
+
+
+END

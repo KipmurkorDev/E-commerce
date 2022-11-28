@@ -3,15 +3,14 @@
   width: 90vw;
 }
 .content {
-  margin-top: 10px;
-  padding-top: 20px;
-  border-radius: 10px;
-  height: 70%;
-  width: 35vw;
-  background-color: #e4ddf4;
   margin-top: 20px;
+  padding-top: 40px;
+  border-radius: 10px;
+  height: 75%;
+  width: 35vw;
+  background-color:#90ADC6;
   position: absolute;
-  top: 50%;
+  top: 58%;
   left: 50%;
   transform: translate(-50%, -50%);
 }
@@ -24,8 +23,8 @@ textarea {
   border-radius: 5px;
 }
 .content > input {
-  width: 70%;
-  height: 20px;
+  width: 80%;
+  height: 30px;
 }
 .content > textarea {
   width: 90%;

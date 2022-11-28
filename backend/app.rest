@@ -1,0 +1,35 @@
+
+GET  http://localhost:5000/Products
+
+
+###
+GET  http://localhost:5000/Products/9c9a20ca-8956-47e2-9ac7-660e6fed9413
+###
+POST  http://localhost:5000/Products/05eae972-23b7-4258-8fdf-6fcd1f66c78d
+Content-Type: application/json
+
+{
+    "name_product":"shoe",
+    "description":"good shoe",
+    "price":"3000", 
+    "discount_rate": "12",
+    "image_url":"hello"
+}
+
+###
+POST  http://localhost:5000/users/signup
+Content-Type: application/json
+
+{
+    "user_name":"emmanuel",
+    "email":"emmanuelkipmurko@gmail.com",
+    "user_password":"kim8717166"
+}
+###
+POST http://localhost:5000/users/login
+Content-Type: application/json
+
+{
+    "email":"emmanuelkipmurko@gmail.com",
+    "user_password":"kim8717166"
+}

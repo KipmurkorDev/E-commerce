@@ -1,4 +1,4 @@
-CREATE PROCEDURE deleteProduct(@id_product INT)
+CREATE PROCEDURE deleteProduct(@id_product varchar(100))
   AS
   BEGIN
   UPDATE products

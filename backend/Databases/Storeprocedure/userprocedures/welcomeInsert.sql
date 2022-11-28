@@ -1,0 +1,6 @@
+CREATE PROCEDURE insertWelcome
+AS
+BEGIN
+SELECT * FROM users
+WHERE isSent=0
+END

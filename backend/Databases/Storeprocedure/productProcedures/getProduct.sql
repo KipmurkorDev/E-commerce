@@ -1,4 +1,4 @@
-CREATE PROCEDURE getproduct(@id_product INT)
+CREATE PROCEDURE getproduct(@id_product varchar(100))
   AS
   BEGIN
   SELECT * FROM products

@@ -1,6 +1,7 @@
 const sqlConfig = require("../Config/config");
 const sql = require("mssql");
-const { v4 } = require("uuid");
+const uuid = require("uuid");
+require("dotenv").config();
 
 const getProducts = async (req, res) => {
   try {
@@ -33,7 +34,7 @@ const getProduct = async (req, res) => {
 };
 const addproduct = async (req, res) => {
   try {
-    const { id_product } = v4();
+    const id_product = uuid.v4();
     const { name_product, description, price, discount_rate, image_url } =
       req.body;
     const pool = await sql.connect(sqlConfig);

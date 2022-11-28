@@ -1,50 +1,32 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
-
+const url = "http://localhost:5000/Products";
 const initialState = {
   products: [],
 };
 
 export const getproducts = createAsyncThunk("Products", async () => {
   let products = [];
-  await axios
-    .get("https://e-commerce-b5db9-default-rtdb.firebaseio.com/Products.json")
-    .then((data) => {
-      console.log(data);
-      for (let key in data.data) {
-        products.push({
-          id: key,
-          name: data.data[key].name,
-          price: data.data[key].price,
-          image: data.data[key].image,
-          discount_rate: data.data[key].discount_rate,
-          description: data.data[key].description,
-        });
-      }
-    });
+  await axios.get(url).then((data) => {
+    products = [...data.data];
+  });
+  console.log(products);
   return products;
 });
 export const addproducts = createAsyncThunk(
   "postProducts",
   async (data) => {
-    const response = await axios
-      .post(
-        "https://e-commerce-b5db9-default-rtdb.firebaseio.com/Products.json",
-        data
-      )
-      .then((data) => data.json());
+    const response = await axios.post(url, data).then((data) => data.json());
     return response;
   },
   getproducts()
 );
 export const deleProduct = createAsyncThunk(
   "postProducts",
-  async (id) => {
+  async (id_product) => {
     const response = await axios
-      .delete(
-        `https://e-commerce-b5db9-default-rtdb.firebaseio.com/Products/${id}.json`
-      )
+      .delete(`${url}/${id_product}`)
       .then((data) => data.json());
     return response;
   },

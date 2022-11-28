@@ -7,10 +7,10 @@ export default function AddProduct() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [formInputs, setFormInputs] = useState({
-    name: "",
+    name_product: "",
     price: 1,
     description: "",
-    image: "",
+    image_url: "",
     discount_rate: 1,
   });
   const handleInputChange = (e) => {
@@ -22,8 +22,8 @@ export default function AddProduct() {
 
   const validate = (e) => {
     if (
-      formInputs.name === "" ||
-      formInputs.image === "" ||
+      formInputs.name_product === "" ||
+      formInputs.image_url === "" ||
       formInputs.description === ""
     ) {
       alert(" You did not complete  the form, kindly do so.");
@@ -35,9 +35,9 @@ export default function AddProduct() {
   };
   const clearForm = () => {
     setFormInputs({
-      name: "",
+      name_product: "",
       price: 1,
-      image: "",
+      image_url: "",
       description: "",
       discount_rate: 1,
     });
@@ -53,16 +53,17 @@ export default function AddProduct() {
       <input
         type="text"
         id="name"
-        name="name"
-        value={formInputs.name}
+        name="name_product"
+        value={formInputs.name_product}
         onChange={handleInputChange}
       />
+    
       <label htmlFor="img">Image:</label>
       <input
         type="text"
-        name="image"
-        id="image"
-        value={formInputs.image}
+        name="image_url"
+        id="image_url"
+        value={formInputs.image_url}
         onChange={handleInputChange}
       />
 
